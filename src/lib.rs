@@ -116,8 +116,8 @@ impl fmt::Display for Universe {
 #[wasm_bindgen]
 impl Universe {
     pub fn new() -> Universe {
-        let width = 128;
-        let height = 128;
+        let width = 256;
+        let height = 256;
 
         let size = width * height;
         let mut cells = BitVec::with_capacity(width * height);
