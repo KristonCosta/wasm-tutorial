@@ -5,7 +5,12 @@ authors = ["kriston"]
 edition = "2018"
 
 [lib]
+name = "wasm_time"
 crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "wasm_bench"
+path = "bin/main.rs"
 
 [features]
 default = ["console_error_panic_hook"]
@@ -41,13 +46,10 @@ wasm-opt = ["-O3", "--enable-mutable-globals"]
 wasm-bindgen-test = "0.3.13"
 criterion = "0.3"
 
-[profile.bench]
-debug = true
-
 [[bench]]
 name = "bench"
 harness = false
 
 [profile.release]
 # Tell `rustc` to optimize for small code size.
-opt-level = "s"
+opt-level = 3

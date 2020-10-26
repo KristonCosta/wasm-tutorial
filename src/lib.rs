@@ -126,6 +126,7 @@ impl Universe {
             // unsafe { cells.push(Math::random() <= 0.5) }
             // consistent for bench
             unsafe { 
+                //cells.push(Math::random() <= 0.5);
                 cells.push(i % 2 == 0 || i % 7 == 0);
                 buffer.push(i % 2 == 0 || i % 7 == 0);
              }
@@ -140,7 +141,7 @@ impl Universe {
     }
 
     pub fn tick(&mut self) {
-       // let _timer = Timer::new("Universe::tick");
+        // let _timer = Timer::new("Universe::tick");
         for row in 0..self.height {
             for column in 0..self.width {
                 let idx = self.get_index(row, column);
@@ -159,8 +160,9 @@ impl Universe {
                     (false, 3) => true,
                     (otherwise, _) => otherwise,
                 };
-
-                self.buffer.set(idx, next_cell);
+                unsafe {
+                    self.buffer.set_unchecked(idx, next_cell);
+                }
             }
         }
         std::mem::swap(&mut self.cells, &mut self.buffer);
